@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un produit{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/products.css') }}">
+{% endblock %}
+
+{% block body %}
+<main class="add-main-bg">
+    <section class="product-header">
+        <div class="container">
+            <h1 class="game-title">Ajouter un produit</h1>
+            <div class="extension-bar">Formulaire de création</div>
+        </div>
+    </section>
+    <section class="product-detail">
+        <div class="container">
+            <div class="product-content add-product-flex">
+                <!-- Bloc médias à gauche (optionnel, pour l'instant vide) -->
+                <div class="product-gallery add-media-preview">
+                    <span>Aperçu image/vidéo<br><small>(à venir)</small></span>
+                </div>
+                <!-- Formulaire à droite -->
+                <div class="product-info add-form-encadre">
+                    <h2 class="product-add-title add-form-title">Ajouter un produit</h2>
+                    {{ form_start(form, {'attr': {'class': 'product-add-form', 'aria-labelledby': 'product-add-title'}}) }}
+                        {{ form_errors(form) }}
+                        <div class="detail-item">{{ form_row(form.title, {'attr': {'aria-label': 'Titre du produit'}}) }}</div>
+                        <div class="detail-item">{{ form_row(form.description, {'attr': {'aria-label': 'Description du produit'}}) }}</div>
+                        <div class="detail-item">{{ form_row(form.price, {'attr': {'aria-label': 'Prix du produit'}}) }}</div>
+                        <div class="detail-item">{{ form_row(form.category, {'attr': {'aria-label': 'Catégorie du produit'}}) }}</div>
+                        <div class="detail-item">{{ form_row(form.quantity, {'attr': {'aria-label': 'Quantité'}}) }}</div>
+                        <div class="detail-item">{{ form_row(form.number, {'attr': {'aria-label': 'Numéro du produit'}}) }}</div>
+                        <div class="detail-item">{{ form_row(form.extension, {'attr': {'aria-label': 'Extension'}}) }}</div>
+                        <div class="detail-item">{{ form_row(form.rarity, {'attr': {'aria-label': 'Rareté'}}) }}</div>
+                        <div class="detail-item">{{ form_row(form.type, {'attr': {'aria-label': 'Type'}}) }}</div>
+                        <div class="detail-item">
+                            <label class="add-media-label">Médias (image/vidéo)</label>
+                            <div class="media-collection-wrapper">
+                                {{ form_widget(form.media, {'attr': {'aria-label': 'Médias (image ou vidéo)'}}) }}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-add" aria-label="Ajouter le produit">Ajouter le produit</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/products.css') }}">
+
+        <script src="/js/nav.js" defer></script>
+        <script src="/js/csrf-protection.js" defer></script>
+        <script src="/js/ajax.js" defer></script>
+        {% block javascripts %}{% endblock %}
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a href="{{ path('app_home') }}">Accueil</a>
+                <a href="{{ path('app_product_index') }}">Produits</a>
+                {% if app.user %}
+                    <a href="{{ path('app_user_products') }}">Mes Articles</a>
+                    <a href="{{ path('app_favorites') }}" class="nav-fav">❤️</a>
+                    <form method="post" action="{{ path('app_logout') }}" class="nav-inline-form">
+                        <button type="submit">Déconnexion</button>
+                    </form>
+                {% else %}
+                    <form method="get" action="{{ path('app_login') }}" class="nav-inline-form">
+                        <button type="submit">Connexion</button>
+                    </form>
+                    <form method="get" action="{{ path('app_register') }}" class="nav-inline-form">
+                        <button type="submit">Inscription</button>
+                    </form>
+                {% endif %}
+                <a href="{{ path('cart') }}" class="nav-cart">🛒 <span class="cart-badge">0</span></a>
+            </nav>
+        </header>
+       {% block body %}{% endblock %}
+       
+       <section class="contact-section" style="background:#181818; color:#fff; padding:32px 18px 18px 18px; margin-top:32px; border-radius:12px 12px 0 0; font-size:1em;">
+            <div style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; gap:48px;">
+                <div style="flex:2; min-width:220px;">
+                    <strong>Destocard</strong>
+                    <span>Votre boutique spécialisée en cartes Pokémon. Nous proposons des cartes rares et des produits exclusifs pour les collectionneurs.</span>
+                </div>
+                <div style="flex:1; min-width:180px;">
+                    <strong>Liens utiles</strong><br>
+                    <a href="#" style="color:#6cf; text-decoration:underline; display:block; margin-bottom:2px;">À propos de nous</a>
+                    <a href="#" style="color:#6cf; text-decoration:underline; display:block; margin-bottom:2px;">Conditions générales</a>
+                    <a href="#" style="color:#6cf; text-decoration:underline; display:block; margin-bottom:2px;">Politique de confidentialité</a>
+                    <a href="#" style="color:#6cf; text-decoration:underline; display:block;">FAQ</a>
+                </div>
+                <div style="flex:1; min-width:180px;">
+                    <strong>Contact</strong><br>
+                    <span style="display:block; margin-bottom:2px;">✉ <a href="mailto:contact@destocard.fr" style="color:#6cf; text-decoration:underline;">contact@destocard.fr</a></span>
+                    <span style="display:block; margin-bottom:2px;">📞 01 23 45 67 89</span>
+                    <span style="display:block; margin-bottom:2px;">
+                        <a href="#" style="color:#6cf; margin-right:8px;">🐦</a>
+                        <a href="#" style="color:#6cf; margin-right:8px;">📘</a>
+                        <a href="#" style="color:#6cf;">💙</a>
+                    </span>
+                </div>
+            </div>
+            <div style="text-align:center; color:#aaa; font-size:0.95em; margin-top:18px;">© 2023 Destocard. Tous droits réservés.</div>
+        </section>
+        <footer class="home-footer-nav">
+            <a href="#" class="home-footer-icon" title="Profil"><span class="footer-ico">&#128100;</span></a>
+            <a href="#" class="home-footer-icon" title="Messages"><span class="footer-ico">&#9993;</span></a>
+            <a href="#" class="home-footer-icon" title="Ajouter"><span class="footer-ico">&#10133;</span></a>
+            <a href="#" class="home-footer-icon" title="Menu"><span class="footer-ico">&#9776;</span></a>
+        </footer>
+    </body>
+</html>

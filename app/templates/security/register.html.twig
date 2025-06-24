@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/common.css">
+{% endblock %}
+
+{% block body %}
+<div class="register-container">
+    <a href="{{ path('app_home') }}" class="back-arrow" title="Retour à l'accueil">&#8592; Accueil</a>
+    <h1 class="register-title">Inscription</h1>
+
+    {% if error %}
+        <div class="alert alert-error register-error">{{ error }}</div>
+    {% endif %}
+
+    <div class="register-form-block">
+        {{ form_start(registerForm, {'attr': {'class': 'register-form', 'aria-labelledby': 'register-title'}}) }}
+            {{ form_errors(registerForm) }}
+            <div class="register-form-group">{{ form_row(registerForm.civility, {'attr': {'aria-label': 'Civilité'}}) }}</div>
+             <div class="register-form-group">{{ form_row(registerForm.firstname, {'attr': {'aria-label': 'Prénom'}}) }}</div>
+            <div class="register-form-group">{{ form_row(registerForm.lastname, {'attr': {'aria-label': 'Nom'}}) }}</div>
+            <div class="register-form-group">{{ form_row(registerForm.email, {'attr': {'aria-label': 'Adresse email'}}) }}</div>
+            <div class="register-form-group">{{ form_row(registerForm.password, {'attr': {'aria-label': 'Mot de passe'}}) }}</div>
+            <div class="register-form-group">{{ form_row(registerForm.phoneNumber, {'attr': {'aria-label': 'Numéro de téléphone'}}) }}</div>
+            <button type="submit" class="register-btn btn btn-add" aria-label="S'inscrire">S'inscrire</button>
+        {{ form_end(registerForm) }}
+    </div>
+
+    <div class="register-login-block">
+        <h2 class="register-login-title">Vous avez déjà un compte ?</h2>
+        <form method="get" action="{{ path('app_login') }}" class="register-login-form">
+            <button type="submit" class="register-login-btn btn">Se connecter</button>
+        </form>
+    </div>
+</div>
+{% endblock %} 

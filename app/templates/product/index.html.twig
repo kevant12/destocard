@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Produits{% endblock %}
+
+{% block body %}
+<div class="products-container">
+    <h1>Nos Produits</h1>
+
+    <div class="products-grid">
+        {% for product in products %}
+            <div class="product-card">
+                {% if product.media|length > 0 %}
+                    <img src="{{ asset('upload/' ~ product.media|first.name) }}" alt="{{ product.title }}">
+                {% endif %}
+                <h3>{{ product.title }}</h3>
+                <p class="price">{{ product.price }} €</p>
+                <p class="description">{{ product.description }}</p>
+                <div class="product-actions">
+                    {% if app.user %}
+                        <button class="like-button {% if product in app.user.likes %}active{% endif %}" data-product-id="{{ product.id }}" aria-label="Ajouter {{ product.title }} aux favoris">
+                            ❤️
+                        </button>
+                    {% endif %}
+                    <form method="post" action="{{ path('add_to_cart', {'id': product.id}) }}" class="add-to-cart-form">
+                        <button type="submit" aria-label="Ajouter {{ product.title }} au panier">Ajouter au panier</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/products.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.querySelectorAll('.like-button').forEach(button => {
+            button.addEventListener('click', async () => {
+                const productId = button.dataset.productId;
+                try {
+                    const response = await fetch(`/favorite/toggle/${productId}`, {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    });
+                    const data = await response.json();
+                    if (data.success) {
+                        button.classList.toggle('active', data.isLiked);
+                    }
+                } catch (error) {
+                    console.error('Erreur lors de la mise à jour des favoris:', error);
+                }
+            });
+        });
+    </script>
+{% endblock %}
