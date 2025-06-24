@@ -15,9 +15,16 @@
     <a href="{{ path('app_home') }}" class="back-arrow" title="Retour à l'accueil">&#8592; Accueil</a>
     <h1 class="login-title">Connexion</h1>
 
+    {# Affichage des erreurs de sécurité (UserChecker, etc.) #}
     {% if error %}
         <div class="alert alert-error login-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-error login-error">{{ message }}</div>
+    {% endfor %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success login-success">{{ message }}</div>
+    {% endfor %}
 
     <form method="post" class="login-form" aria-labelledby="login-title">
         <div class="login-form-group">

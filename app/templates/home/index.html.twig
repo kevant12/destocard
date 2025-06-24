@@ -3,7 +3,10 @@
 
 {% block title %}Accueil{% endblock %}
 
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+{% endblock %}
 
 {% block body %}
 <div class="home-main-container">
@@ -41,7 +44,7 @@
         <div class="home-latest-grid home-latest-grid-3">
             {% for i in 1..9 %}
             <article class="home-latest-article">
-                <a href="{{ path('app_product_show', {'id': i}) }}" class="home-latest-link">
+                <a href="#" class="home-latest-link">
                     <div class="home-latest-num">numéro</div>
                     <div class="home-latest-img">
                         <img src="https://via.placeholder.com/80x110/000/fff?text=carte" alt="Carte {{ i }}">
@@ -103,4 +106,37 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pokémon_logo.svg" alt="Pokémon">
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const grid = document.getElementById('products-grid');
+        const grid2x2Btn = document.getElementById('grid-2x2');
+        const grid3x3Btn = document.getElementById('grid-3x3');
+        const grid4x4Btn = document.getElementById('grid-4x4');
+        const buttons = [grid2x2Btn, grid3x3Btn, grid4x4Btn];
+
+        function setActive(button) {
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        }
+
+        grid2x2Btn.addEventListener('click', () => {
+            grid.className = 'products-grid grid-2x2';
+            setActive(grid2x2Btn);
+        });
+
+        grid3x3Btn.addEventListener('click', () => {
+            grid.className = 'products-grid grid-3x3';
+            setActive(grid3x3Btn);
+        });
+
+        grid4x4Btn.addEventListener('click', () => {
+            grid.className = 'products-grid'; // default is 4x4
+            setActive(grid4x4Btn);
+        });
+    });
+</script>
 {% endblock %} 

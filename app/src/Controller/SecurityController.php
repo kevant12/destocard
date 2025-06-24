@@ -87,7 +87,7 @@ class SecurityController extends AbstractController
             // Envoyer l'email de vérification
             $this->sendVerificationEmail($user, $mailer);
 
-            $this->addFlash('success', 'Inscription réussie ! Vérifiez votre email pour activer votre compte.');
+            $this->addFlash('success', "Un email de confirmation vient de vous être envoyé. Veuillez cliquer sur le lien reçu pour activer votre compte.");
 
             return $this->redirectToRoute('app_login');
         }

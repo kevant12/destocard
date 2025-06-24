@@ -37,37 +37,44 @@
         </header>
        {% block body %}{% endblock %}
        
-       <section class="contact-section" style="background:#181818; color:#fff; padding:32px 18px 18px 18px; margin-top:32px; border-radius:12px 12px 0 0; font-size:1em;">
-            <div style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; gap:48px;">
-                <div style="flex:2; min-width:220px;">
+       <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-section about">
                     <strong>Destocard</strong>
-                    <span>Votre boutique spécialisée en cartes Pokémon. Nous proposons des cartes rares et des produits exclusifs pour les collectionneurs.</span>
+                    <p>Votre boutique spécialisée en cartes Pokémon. Nous proposons des cartes rares et des produits exclusifs pour les collectionneurs.</p>
                 </div>
-                <div style="flex:1; min-width:180px;">
-                    <strong>Liens utiles</strong><br>
-                    <a href="#" style="color:#6cf; text-decoration:underline; display:block; margin-bottom:2px;">À propos de nous</a>
-                    <a href="#" style="color:#6cf; text-decoration:underline; display:block; margin-bottom:2px;">Conditions générales</a>
-                    <a href="#" style="color:#6cf; text-decoration:underline; display:block; margin-bottom:2px;">Politique de confidentialité</a>
-                    <a href="#" style="color:#6cf; text-decoration:underline; display:block;">FAQ</a>
+                <div class="footer-section links">
+                    <strong>Liens utiles</strong>
+                    <ul>
+                        <li><a href="#">À propos de nous</a></li>
+                        <li><a href="#">Conditions générales</a></li>
+                        <li><a href="#">Politique de confidentialité</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
                 </div>
-                <div style="flex:1; min-width:180px;">
-                    <strong>Contact</strong><br>
-                    <span style="display:block; margin-bottom:2px;">✉ <a href="mailto:contact@destocard.fr" style="color:#6cf; text-decoration:underline;">contact@destocard.fr</a></span>
-                    <span style="display:block; margin-bottom:2px;">📞 01 23 45 67 89</span>
-                    <span style="display:block; margin-bottom:2px;">
-                        <a href="#" style="color:#6cf; margin-right:8px;">🐦</a>
-                        <a href="#" style="color:#6cf; margin-right:8px;">📘</a>
-                        <a href="#" style="color:#6cf;">💙</a>
-                    </span>
+                <div class="footer-section contact">
+                    <strong>Contact</strong>
+                    <ul>
+                        <li><span class="icon">✉</span> <a href="mailto:contact@destocard.fr">contact@destocard.fr</a></li>
+                        <li><span class="icon">📞</span> 01 23 45 67 89</li>
+                        <li class="social-icons">
+                            <a href="#">🐦</a>
+                            <a href="#">📘</a>
+                            <a href="#">💙</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div style="text-align:center; color:#aaa; font-size:0.95em; margin-top:18px;">© 2023 Destocard. Tous droits réservés.</div>
-        </section>
-        <footer class="home-footer-nav">
-            <a href="#" class="home-footer-icon" title="Profil"><span class="footer-ico">&#128100;</span></a>
-            <a href="#" class="home-footer-icon" title="Messages"><span class="footer-ico">&#9993;</span></a>
-            <a href="#" class="home-footer-icon" title="Ajouter"><span class="footer-ico">&#10133;</span></a>
-            <a href="#" class="home-footer-icon" title="Menu"><span class="footer-ico">&#9776;</span></a>
+            <div class="footer-bottom">
+                &copy; 2023 Destocard. Tous droits réservés.
+            </div>
         </footer>
+
+        <nav class="mobile-footer-nav">
+            <a href="#" class="mobile-footer-icon" title="Profil"><span class="footer-ico">&#128100;</span></a>
+            <a href="#" class="mobile-footer-icon" title="Messages"><span class="footer-ico">&#9993;</span></a>
+            <a href="#" class="mobile-footer-icon" title="Ajouter"><span class="footer-ico">&#10133;</span></a>
+            <a href="#" class="mobile-footer-icon" title="Menu"><span class="footer-ico">&#9776;</span></a>
+        </nav>
     </body>
 </html>
