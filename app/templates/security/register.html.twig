@@ -2,11 +2,7 @@
 
 {% block title %}Inscription{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="/css/product.css">
-    <link rel="stylesheet" href="/css/common.css">
-{% endblock %}
+
 
 {% block body %}
 <div class="register-container">
@@ -26,8 +22,14 @@
     <div class="register-form-block">
         {{ form_start(registerForm, {'attr': {'class': 'register-form', 'aria-labelledby': 'register-title'}}) }}
             {{ form_errors(registerForm) }}
-            <div class="register-form-group">{{ form_row(registerForm.civility, {'attr': {'aria-label': 'Civilité'}}) }}</div>
-             <div class="register-form-group">{{ form_row(registerForm.firstname, {'attr': {'aria-label': 'Prénom'}}) }}</div>
+            <div class="register-form-group register-civility-group">
+                <label class="register-civility-label">Civilité</label>
+                <div class="register-civility-inline">
+                    {{ form_widget(registerForm.civility) }}
+                </div>
+                {{ form_errors(registerForm.civility) }}
+            </div>
+            <div class="register-form-group">{{ form_row(registerForm.firstname, {'attr': {'aria-label': 'Prénom'}}) }}</div>
             <div class="register-form-group">{{ form_row(registerForm.lastname, {'attr': {'aria-label': 'Nom'}}) }}</div>
             <div class="register-form-group">{{ form_row(registerForm.email, {'attr': {'aria-label': 'Adresse email'}}) }}</div>
             <div class="register-form-group">{{ form_row(registerForm.password, {'attr': {'aria-label': 'Mot de passe'}}) }}</div>

@@ -41,6 +41,10 @@
                                 {{ form_widget(form.media, {'attr': {'aria-label': 'Médias (image ou vidéo)'}}) }}
                             </div>
                         </div>
+                        <div class="detail-item">
+                            <label for="media_upload" class="custom-file-label">Parcourir une image ou une vidéo</label>
+                            <input type="file" id="media_upload" name="media_upload" accept="image/*,video/*">
+                        </div>
                         <button type="submit" class="btn-add" aria-label="Ajouter le produit">Ajouter le produit</button>
                     {{ form_end(form) }}
                 </div>
