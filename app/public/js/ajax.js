@@ -105,6 +105,7 @@ document.querySelectorAll('.home-latest-display-btn').forEach(btn => {
     });
 });
 
+
 // Fonction utilitaire pour afficher un message flash
 function showFlash(message, type = 'success') {
     let flash = document.createElement('div');

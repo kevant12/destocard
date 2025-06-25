@@ -10,12 +10,15 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class RegisterFormType extends AbstractType
 {
@@ -23,7 +26,7 @@ class RegisterFormType extends AbstractType
     {
         $builder
         ->add('civility', ChoiceType::class, [
-            'label' => 'Civilité',
+            'label' => '',
             'choices' => [
                 'Monsieur' => 'Mr',
                 'Madame' => 'Mme'
@@ -31,7 +34,7 @@ class RegisterFormType extends AbstractType
             'expanded' => true,
             'multiple' => false,
             'attr' => [
-                'class' => 'form-check-input'
+               
             ],
             'constraints' => [
                 new NotBlank([
@@ -109,19 +112,30 @@ class RegisterFormType extends AbstractType
                     ])
                 ]
             ])
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'first_options' => [
-                    'label' => 'Mot de passe',
-                    'attr' => [
-                        'class' => 'form-control',
-                        'placeholder' => 'Votre mot de passe'
-                    ]
+            ->add('password', PasswordType::class, [
+                'label' => 'Mot de passe',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Votre mot de passe'
                 ],
-                
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'label' => "J'accepte les conditions générales d'utilisation",
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Vous devez accepter les conditions générales.',
+                    ]),
+                ],
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Créer mon compte',
+                'attr' => [
+                    'class' => 'register-login-btn btn',
+                    
                 ]
-            );
-    }
+                ]);
+            }
 
     public function configureOptions(OptionsResolver $resolver): void
     {

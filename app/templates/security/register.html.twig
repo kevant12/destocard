@@ -16,6 +16,12 @@
     {% if error %}
         <div class="alert alert-error register-error">{{ error }}</div>
     {% endif %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-error register-error">{{ message }}</div>
+    {% endfor %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success register-success">{{ message }}</div>
+    {% endfor %}
 
     <div class="register-form-block">
         {{ form_start(registerForm, {'attr': {'class': 'register-form', 'aria-labelledby': 'register-title'}}) }}
@@ -26,15 +32,14 @@
             <div class="register-form-group">{{ form_row(registerForm.email, {'attr': {'aria-label': 'Adresse email'}}) }}</div>
             <div class="register-form-group">{{ form_row(registerForm.password, {'attr': {'aria-label': 'Mot de passe'}}) }}</div>
             <div class="register-form-group">{{ form_row(registerForm.phoneNumber, {'attr': {'aria-label': 'Numéro de téléphone'}}) }}</div>
-            <button type="submit" class="register-btn btn btn-add" aria-label="S'inscrire">S'inscrire</button>
+            <div class="register-form-group">{{ form_row(registerForm.agreeTerms) }}</div>
+            
         {{ form_end(registerForm) }}
     </div>
 
     <div class="register-login-block">
         <h2 class="register-login-title">Vous avez déjà un compte ?</h2>
-        <form method="get" action="{{ path('app_login') }}" class="register-login-form">
-            <button type="submit" class="register-login-btn btn">Se connecter</button>
-        </form>
+        <a href="{{ path('app_login') }}">Se connecter</a>
     </div>
 </div>
 {% endblock %} 
