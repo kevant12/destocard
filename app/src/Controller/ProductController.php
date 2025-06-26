@@ -63,6 +63,27 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Pour chaque média du produit, on gère l'upload ou l'URL
+            foreach ($form->get('media') as $mediaForm) {
+                $media = $mediaForm->getData();
+                if (!$media) continue;
+                $file = $mediaForm->get('file')->getData();
+                if ($file) {
+                    // Si un fichier est uploadé, on le déplace dans public/upload
+                    $filename = uniqid().'.'.$file->guessExtension();
+                    $file->move(
+                        $this->getParameter('kernel.project_dir').'/public/upload',
+                        $filename
+                    );
+                    // On stocke le nom du fichier dans filePath
+                    $media->setFilePath($filename);
+                } else {
+                    // Sinon, on garde la valeur du champ texte (URL ou vide)
+                    // Rien à faire, filePath est déjà rempli par le formulaire
+                }
+                // On lie le média au produit (sécurité)
+                $media->setProducts($product);
+            }
             $this->productService->createProduct($product, $this->getUser());
             $this->addFlash('success', 'Article ajouté avec succès !');
             return $this->redirectToRoute('app_user_products');
@@ -96,6 +117,21 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Pour chaque média du produit, on gère l'upload ou l'URL (comme dans add)
+            foreach ($form->get('media') as $mediaForm) {
+                $media = $mediaForm->getData();
+                if (!$media) continue;
+                $file = $mediaForm->get('file')->getData();
+                if ($file) {
+                    $filename = uniqid().'.'.$file->guessExtension();
+                    $file->move(
+                        $this->getParameter('kernel.project_dir').'/public/upload',
+                        $filename
+                    );
+                    $media->setFilePath($filename);
+                }
+                $media->setProducts($product);
+            }
             $this->productService->updateProduct($product);
             $this->addFlash('success', 'Article modifié avec succès !');
             return $this->redirectToRoute('app_user_products');

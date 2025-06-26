@@ -19,6 +19,9 @@ class Media
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $video_url = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $file_path = null;
+
     #[ORM\ManyToOne(inversedBy: 'media')]
     private ?Products $products = null;
 
@@ -48,6 +51,17 @@ class Media
     {
         $this->video_url = $video_url;
 
+        return $this;
+    }
+
+    public function getFilePath(): ?string
+    {
+        return $this->file_path;
+    }
+
+    public function setFilePath(?string $file_path): static
+    {
+        $this->file_path = $file_path;
         return $this;
     }
 

@@ -19,14 +19,19 @@
     <body>
         <header>
             <div class="logo-header" style="text-align:center; margin-bottom:10px;">
-                <img src="{{ asset('images/logo-destocard.png') }}" alt="Logo Destocard" style="max-width:300px; height:auto;">
+                {# <img src="{{ asset('images/logo2redim.png') }}" alt="Logo Destocard" style="max-width:300px; height:auto;"> #}
+                <video src="{{ asset('video/veo3-ai-video-1750948599536.mp4') }}" autoplay loop muted playsinline class="video">
+    <img src="{{ asset('images/logo-destocard.png') }}" alt="Logo Destocard">
+</video>
             </div>
             <nav>
                 <a href="{{ path('app_home') }}">Accueil</a>
-                <a href="{{ path('app_product_index') }}">Produits</a>
+                
                 {% if app.user %}
+                    <a href="{{ path('app_product_index') }}">Produits</a>
                     <a href="{{ path('app_user_products') }}">Mes Articles</a>
                     <a href="{{ path('app_favorites') }}" class="nav-fav">❤️</a>
+                    <a href="{{ path('cart') }}" class="nav-cart">🛒 <span class="cart-badge">0</span></a>
                     <form method="post" action="{{ path('app_logout') }}" class="nav-inline-form">
                         <button type="submit">Déconnexion</button>
                     </form>
@@ -38,7 +43,7 @@
                         <button type="submit">Inscription</button>
                     </form>
                 {% endif %}
-                <a href="{{ path('cart') }}" class="nav-cart">🛒 <span class="cart-badge">0</span></a>
+                
             </nav>
         </header>
        {% block body %}{% endblock %}

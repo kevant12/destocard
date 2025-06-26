@@ -35,11 +35,9 @@
         <button type="submit" class="login-btn btn btn-add" aria-label="Se connecter">Se connecter</button>
     </form>
 
-    <div class="login-register-block">
-        <h2 class="login-register-title">Pas encore de compte ?</h2>
-        <form method="get" action="{{ path('app_register') }}" class="login-register-form">
-            <button type="submit" class="login-register-btn btn">Inscrivez-vous</button>
-        </form>
-    </div>
+    <fieldset class="login-register-fieldset">
+        <legend class="login-register-title">Pas encore de compte ?</legend>
+        <a href="{{ path('app_register') }}" class="login-register-link btn btn-primary" style="margin: 0 auto;">Inscrivez-vous</a>
+    </fieldset>
 </div>
 {% endblock %} 

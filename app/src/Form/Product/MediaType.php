@@ -17,35 +17,35 @@ class MediaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('image_url', TextType::class, [
-                'label' => 'URL de l\'image',
-                'required' => true,
+            ->add('filePath', TextType::class, [
+                'label' => 'URL du média (optionnel)',
+                'required' => false,
                 'attr' => [
-                    'placeholder' => 'https://...'
+                    'placeholder' => 'https://... (ou laissez vide si vous uploadez un fichier)'
                 ],
                 'constraints' => [
                     new Length([
                         'max' => 255,
-                        'maxMessage' => 'L\'URL ne peut pas dépasser {{ limit }} caractères'
-                    ]),
-                    new Url([
-                        'message' => 'Veuillez saisir une URL valide.'
+                        'maxMessage' => 'Le chemin ou l\'URL ne peut pas dépasser {{ limit }} caractères'
                     ])
                 ]
             ])
-            ->add('video_url', TextType::class, [
-                'label' => 'URL de la vidéo (YouTube, etc.)',
+            ->add('file', FileType::class, [
+                'label' => 'Fichier (image ou vidéo)',
+                'mapped' => false,
                 'required' => false,
+                'multiple' => false,
                 'attr' => [
-                    'placeholder' => 'https://youtube.com/...'
+                    'accept' => 'image/*,video/*'
                 ],
                 'constraints' => [
-                    new Length([
-                        'max' => 255,
-                        'maxMessage' => 'L\'URL ne peut pas dépasser {{ limit }} caractères'
-                    ]),
-                    new Url([
-                        'message' => 'Veuillez saisir une URL valide.'
+                    new File([
+                        'maxSize' => '10M',
+                        'mimeTypes' => [
+                            'image/*',
+                            'video/*'
+                        ],
+                        'mimeTypesMessage' => 'Merci d\'uploader une image ou une vidéo valide',
                     ])
                 ]
             ])

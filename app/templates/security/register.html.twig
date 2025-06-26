@@ -7,7 +7,7 @@
 {% block body %}
 <div class="register-container">
     <a href="{{ path('app_home') }}" class="back-arrow" title="Retour à l'accueil">&#8592; Accueil</a>
-    <h1 class="register-title">Inscription</h1>
+    <h1 class="register-title text-center">Inscription</h1>
 
     {% if error %}
         <div class="alert alert-error register-error">{{ error }}</div>
@@ -22,10 +22,14 @@
     <div class="register-form-block">
         {{ form_start(registerForm, {'attr': {'class': 'register-form', 'aria-labelledby': 'register-title'}}) }}
             {{ form_errors(registerForm) }}
-            <div class="register-form-group register-civility-group">
+            <div class="register-form-group register-civility-group text-center">
                 <label class="register-civility-label">Civilité</label>
-                <div class="register-civility-inline">
-                    {{ form_widget(registerForm.civility) }}
+                <div class="register-civility-inline" style="justify-content: center; gap: 32px;">
+                    {% for choice in registerForm.civility %}
+                        <label style="display: flex; align-items: center; gap: 6px; font-weight: 500; color: #ff5722; margin-bottom: 0; cursor: pointer;">
+                            {{ form_widget(choice) }} {{ form_label(choice) }}
+                        </label>
+                    {% endfor %}
                 </div>
                 {{ form_errors(registerForm.civility) }}
             </div>
@@ -34,14 +38,19 @@
             <div class="register-form-group">{{ form_row(registerForm.email, {'attr': {'aria-label': 'Adresse email'}}) }}</div>
             <div class="register-form-group">{{ form_row(registerForm.password, {'attr': {'aria-label': 'Mot de passe'}}) }}</div>
             <div class="register-form-group">{{ form_row(registerForm.phoneNumber, {'attr': {'aria-label': 'Numéro de téléphone'}}) }}</div>
-            <div class="register-form-group">{{ form_row(registerForm.agreeTerms) }}</div>
-            
+            <div class="register-form-group" style="display: flex; align-items: center; gap: 8px;">
+                {{ form_widget(registerForm.agreeTerms) }}
+                <label for="{{ registerForm.agreeTerms.vars.id }}" style="margin: 0; cursor: pointer; color: #ff5722; font-weight: 500;">
+                    J'accepte la récolte des données nécessaires à la gestion de mon compte
+                </label>
+                {{ form_errors(registerForm.agreeTerms) }}
+            </div>
         {{ form_end(registerForm) }}
     </div>
 
-    <div class="register-login-block">
-        <h2 class="register-login-title">Vous avez déjà un compte ?</h2>
-        <a href="{{ path('app_login') }}">Se connecter</a>
-    </div>
+    <fieldset class="register-login-fieldset">
+        <legend class="register-login-title">Vous avez déjà un compte ?</legend>
+        <a href="{{ path('app_login') }}" class="register-login-link btn btn-primary" style="margin: 0 auto;">Se connecter</a>
+    </fieldset>
 </div>
 {% endblock %} 

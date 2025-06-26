@@ -5,9 +5,11 @@
 {% block body %}
     <a href="{{ path('app_home') }}" class="back-arrow" title="Retour à l'accueil">&#8592; Accueil</a>
     <div class="container">
-        <div class="header">
+        <div class="products-header" style="display: flex; flex-direction: column; align-items: center; margin: 48px auto 24px auto; max-width: 900px;">
             <h1>Mes Articles</h1>
-            <a href="{{ path('app_product_add') }}" class="btn-add">Ajouter un article</a>
+            <div style="margin-top: 18px;">
+                <a href="{{ path('app_product_add') }}" class="add-product-link">Ajouter un article</a>
+            </div>
         </div>
 
         {% for message in app.flashes('success') %}
